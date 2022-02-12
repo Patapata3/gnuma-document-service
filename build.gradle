@@ -71,4 +71,8 @@ jar {
                 'Main-Class': 'com.example.documentservice.DocumentServiceApplication'
         )
     }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
