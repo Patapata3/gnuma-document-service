@@ -65,6 +65,10 @@ test {
     useJUnitPlatform()
 }
 
-springBoot {
-    mainClassName('com.example.documentservice.DocumentServiceApplication')
+bootJar {
+    manifest {
+        attributes(
+                'Start-Class': 'com.example.documentservice.DocumentServiceApplication'
+        )
+    }
 }
