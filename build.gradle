@@ -67,6 +67,6 @@ test {
 
 bootJar {
     manifest {
-        attributes 'Start-Class': 'com.example.documentservice.DocumentServiceApplication'
+        attributes 'Main-Class': 'com.example.documentservice.DocumentServiceApplication'
     }
 }
