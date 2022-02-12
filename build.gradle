@@ -2,13 +2,11 @@ plugins {
     id 'org.springframework.boot' version '2.5.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'application'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-mainClassName = 'com.example.documentservice.DocumentServiceApplication'
 
 repositories {
     mavenCentral()
@@ -60,6 +58,14 @@ dependencyManagement {
     imports {
         mavenBom "org.axonframework:axon-bom:${axonVersion}"
     }
+}
+
+bootJar {
+    archiveClassifier.set('boot')
+}
+
+jar {
+    archiveClassifier.set('')
 }
 
 
