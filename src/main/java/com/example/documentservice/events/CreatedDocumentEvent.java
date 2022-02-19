@@ -3,6 +3,7 @@ package com.example.documentservice.events;
 import com.example.documentservice.DataField;
 import com.example.documentservice.Task;
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,12 +17,12 @@ public class CreatedDocumentEvent {
     private final String citationInformation;
     private final List<DataField> dataFields;
     private final List<Task> tasks;
-    private final File data;
+    private final byte[] data;
     private final boolean augmented;
     private final UUID rootDocument;
 
     public CreatedDocumentEvent(UUID id, String title, String domain, String source, String contributor, String citationInformation,
-                                List<DataField> dataFields, List<Task> tasks, File data,
+                                List<DataField> dataFields, List<Task> tasks, byte[] data,
                                 boolean augmented, UUID rootDocument) {
         this.id = id;
         this.title = title;
@@ -33,7 +34,7 @@ public class CreatedDocumentEvent {
         this.tasks = tasks;
         this.data = data;
 
-        System.out.println("Hello from the Created Document Event " + this.data);
+        System.out.println("Hello from the Created Document Event ");
         this.augmented = augmented;
         this.rootDocument = rootDocument;
     }
@@ -70,7 +71,7 @@ public class CreatedDocumentEvent {
         return tasks;
     }
 
-    public File getData() {
+    public byte[] getData() {
         return data;
     }
 

@@ -7,6 +7,7 @@ import com.example.documentservice.commands.UpdateDocumentCommand;
 import com.example.documentservice.events.CreatedDocumentEvent;
 import com.example.documentservice.events.DeletedDocumentEvent;
 import com.example.documentservice.events.UpdatedDocumentEvent;
+import org.apache.commons.io.FileUtils;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -16,6 +17,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 import static org.axonframework.modelling.command.AggregateLifecycle.markDeleted;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,7 +43,7 @@ public class Document {
 
     // Command handler contains the business logic and validations.
     @CommandHandler
-    public Document(CreateDocumentCommand cmd) {
+    public Document(CreateDocumentCommand cmd) throws IOException {
         //Publish the message internally to this aggregate and aggregate members and later on to the event bus
         UUID documentId = UUID.randomUUID();
         this.title = cmd.getTitle();
@@ -56,7 +58,7 @@ public class Document {
         this.augmented = cmd.isAugmented();
         this.rootDocument = cmd.getRootDocument();
         AggregateLifecycle.apply(new CreatedDocumentEvent(documentId, title, domain, source, contributor,
-                citationInformation, dataFields, tasks, data, augmented, rootDocument));
+                citationInformation, dataFields, tasks, FileUtils.readFileToByteArray(data), augmented, rootDocument));
     }
 
     @CommandHandler
@@ -65,7 +67,7 @@ public class Document {
     }
 
     @CommandHandler
-    public void handle(UpdateDocumentCommand cmd) {
+    public void handle(UpdateDocumentCommand cmd) throws IOException {
         this.title = cmd.getTitle();
         this.domain = cmd.getDomain();
         this.source = cmd.getSource();
@@ -77,7 +79,7 @@ public class Document {
         this.augmented = cmd.isAugmented();
         this.rootDocument = cmd.getRootDocument();
         AggregateLifecycle.apply(new UpdatedDocumentEvent(id, title, domain, source, contributor,
-                citationInformation, dataFields, tasks, data, augmented, rootDocument));
+                citationInformation, dataFields, tasks, FileUtils.readFileToByteArray(data), augmented, rootDocument));
     }
 
     @CommandHandler

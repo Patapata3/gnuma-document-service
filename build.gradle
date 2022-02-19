@@ -45,6 +45,7 @@ dependencies {
     implementation 'org.axonframework:axon-configuration:4.5.4'
     implementation 'org.axonframework:axon-spring-boot-starter:4.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     testImplementation 'org.axonframework:axon-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'

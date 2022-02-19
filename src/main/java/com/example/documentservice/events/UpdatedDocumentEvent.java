@@ -16,12 +16,12 @@ public class UpdatedDocumentEvent {
     private final String citationInformation;
     private final List<DataField> dataFields;
     private final List<Task> tasks;
-    private final File data;
+    private final byte[] data;
     private final boolean augmented;
     private final UUID rootDocument;
 
     public UpdatedDocumentEvent(UUID id, String title, String domain, String source, String contributor, String citationInformation,
-                                List<DataField> dataFields, List<Task> tasks, File data,
+                                List<DataField> dataFields, List<Task> tasks, byte[] data,
                                 boolean augmented, UUID rootDocument) {
         this.id = id;
         this.title = title;
@@ -68,7 +68,7 @@ public class UpdatedDocumentEvent {
         return tasks;
     }
 
-    public File getData() {
+    public byte[] getData() {
         return data;
     }
 

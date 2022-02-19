@@ -19,14 +19,14 @@ public class DocumentParser {
 
     }
 
-    public List<Sentence> parseDocument(File data)  {
+    public List<Sentence> parseDocument(byte[] data)  {
         System.out.println("Hallo beginne mit dem Parsen");
 
         List<Sentence> sentences = new ArrayList<Sentence>();
         int id = 0;
         Map<Integer, String> metaTags = new HashMap<Integer, String>();
         try {
-            BufferedReader b = new BufferedReader(new FileReader(data));
+            BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data)));
 
             String readLine = "";
 
